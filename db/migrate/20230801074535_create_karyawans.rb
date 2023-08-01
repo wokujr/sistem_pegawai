@@ -4,7 +4,6 @@ class CreateKaryawans < ActiveRecord::Migration[7.0]
       t.string :nama
       t.string :alamat
       t.integer :usia
-      t.string :jabatan
 
       t.timestamps
     end

@@ -1,2 +1,0 @@
-module GajisHelper
-end

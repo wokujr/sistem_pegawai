@@ -1,5 +1,7 @@
 class Karyawan < ApplicationRecord
-  has_one :gaji
+  has_one :salary
+  has_one :position, through: :salary
+
   self.primary_key = :id
   before_create :generate_uuid
   def generate_uuid

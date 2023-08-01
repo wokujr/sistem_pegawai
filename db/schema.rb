@@ -10,21 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_01_074606) do
-  create_table "gajis", force: :cascade do |t|
-    t.string "gaji"
-    t.string "kode_gaji"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2023_08_01_165730) do
   create_table "karyawans", id: :string, force: :cascade do |t|
     t.string "nama"
     t.string "alamat"
     t.integer "usia"
-    t.string "jabatan"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.string "title"
+    t.float "salary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "salaries", force: :cascade do |t|
+    t.integer "karyawan_id", null: false
+    t.integer "position_id"
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["karyawan_id"], name: "index_salaries_on_karyawan_id"
+    t.index ["position_id"], name: "index_salaries_on_position_id"
   end
 
 end

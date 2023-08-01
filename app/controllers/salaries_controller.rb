@@ -1,4 +1,4 @@
-class GajisController < ApplicationController
+class SalariesController < ApplicationController
   def new
     @karyawan = Karyawan.find(params[:karyawan_id])
     @gaji = Gaji.new
@@ -13,8 +13,6 @@ class GajisController < ApplicationController
       render new, status: :unprocessable_entity
     end
   end
-
-
   private
   def gaji_karyawan
     params.require(:gaji).permit(:karyawan_id, :kode_gaji)

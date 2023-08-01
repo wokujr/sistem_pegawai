@@ -16,7 +16,6 @@ class KaryawansController < ApplicationController
     @karyawan = Karyawan.new(employer_params)
     if @karyawan.save
       redirect_to karyawans_path, notice: "Berhasil menambahkan karyawan baru"
-
     else
       render :new, status: :unprocessable_entity
     end
