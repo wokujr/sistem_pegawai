@@ -1,0 +1,33 @@
+<div class="container">
+
+  <h1 class="text-center mb-4"> Tambahkan Karyawan Baru</h1>
+  <%= form_with model: @karyawan, data: { turbo: "false" } do |form| %>
+
+    <div class="mb-3">
+      <%= form.label :nama %>
+      <%= form.text_field :nama, class: "form-control", placeholder: "Masukan Nama Karyawan" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :alamat %>
+      <%= form.text_field :alamat, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :usia %>
+      <%= form.number_field :usia, class: "form-control"%>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :jabatan %>
+      <%= form.text_field :jabatan, class: "form-control" %>
+    </div>
+
+    <%= form.submit "Tambahkan", class: "btn btn-primary" %>
+    <%= link_to "Back", karyawans_path, class: "btn btn-warning"%>
+
+  <% end %>
+
+
+</div>
+

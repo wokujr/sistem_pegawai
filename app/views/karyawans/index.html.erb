@@ -1,22 +1,27 @@
-<h1 class="mb-4 d-flex align-items-center justify-content-center ">Karyawan</h1>
+<div class="container">
+  <h1 class="mb-4 d-flex align-items-center justify-content-center ">Karyawan</h1>
 
-<table class="table mt-4">
-  <thead>
+  <table class="table mt-4">
+    <thead>
     <tr>
       <th>Nama</th>
       <th>Alamat</th>
       <th>Usia</th>
       <th>Jabatan</th>
+      <th>Action</th>
     </tr>
-  </thead>
+    </thead>
 
-  <% @karyawan.each do |karyawan| %>
-    <tr>
-      <td><%=link_to karyawan.nama, karyawan_path(karyawan) %></td>
-      <td><%= karyawan.alamat %></td>
-      <td><%= karyawan.usia %></td>
-      <td><%= karyawan.jabatan %></td>
-    </tr>
-  <%end %>
+    <% @karyawan.each do |karyawan| %>
+      <tr>
+        <td><%=link_to karyawan.nama, karyawan_path(karyawan) %></td>
+        <td><%= karyawan.alamat %></td>
+        <td><%= karyawan.usia %></td>
+        <td><%= karyawan.jabatan %></td>
+        <td><%= button_to "Delete", karyawan_path(karyawan),method: :delete, data:{turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?"}, class: "btn btn-danger" %></td>
+      </tr>
+    <%end %>
 
-</table>
+  </table>
+  <%= link_to "Tambahkan karyawan", new_karyawan_path, class: "btn btn-primary" %>
+</div>
