@@ -1,0 +1,22 @@
+<h1 class="mb-4 d-flex align-items-center justify-content-center ">Karyawan</h1>
+
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th>Nama</th>
+      <th>Alamat</th>
+      <th>Usia</th>
+      <th>Jabatan</th>
+    </tr>
+  </thead>
+
+  <% @karyawan.each do |karyawan| %>
+    <tr>
+      <td><%=link_to karyawan.nama, karyawan_path(karyawan) %></td>
+      <td><%= karyawan.alamat %></td>
+      <td><%= karyawan.usia %></td>
+      <td><%= karyawan.jabatan %></td>
+    </tr>
+  <%end %>
+
+</table>
