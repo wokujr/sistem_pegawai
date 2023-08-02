@@ -1,4 +1,8 @@
 class SalariesController < ApplicationController
+
+  def edit
+    @karyawan = Karyawan.find_by(id: params[:id])
+  end
   def new
     @karyawan = Karyawan.find_by(id: params[:id])
     @salary = Salary.new

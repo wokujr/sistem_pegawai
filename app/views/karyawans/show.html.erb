@@ -1,14 +1,21 @@
-<h1><%= @karyawan.nama %></h1>
-<p>Alamat: <%= @karyawan.alamat %></p>
-<p>Usia: <%= @karyawan.usia %></p>
+<div class="container">
+  <h1 class="text-center mt-4 mb-4 border border-3 p-2 border-primary"><%= @karyawan.nama %></h1>
+  <table class="table table-bordered border-success border-2">
+    <td><p>Alamat: <%= @karyawan.alamat %></p></td>
+    <td><p>Usia: <%= @karyawan.usia %></p></td>
+    <% if @salary %>
+      <td><h2>Salary: <%= @salary.amount %></h2></td>
+      <td><p>Position: <%= @position.title %></p></td>
+      <% else %>
+      <p><strong>Gaji dan Jabatan not available for this karyawan.</strong></p>
+      <%= link_to "Tambahkan Gaji", new_karyawan_salary_path(@karyawan), class: "btn btn-primary mb-4 mx-2" %>
+      <%= link_to "Tambahkan Jabatan", new_karyawan_position_path(@karyawan), class: "btn btn-success mb-4" %>
+  <% end %>
+  </table>
 
-<% if @salary %>
-  <h2>Salary: <%= @salary.amount %></h2>
-  <p>Position: <%= @position.title %></p>
-<% else %>
-  <p>Salary and Position not available for this karyawan.</p>
-<% end %>
+  <%= link_to 'Back', karyawans_path, class: "btn btn-warning" %>
+  <%= link_to 'Edit', edit_karyawan_path(@karyawan), class: "btn btn-success"%>
+  <%= link_to 'Delete', @karyawan, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
 
-<%= link_to 'Back', karyawans_path %>
-<%= link_to 'Edit', edit_karyawan_path(@karyawan) %>
-<%= link_to 'Delete', @karyawan, method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
+

@@ -1,0 +1,18 @@
+<div class="container">
+  <h1>EDIT <%=@karyawan.nama %></h1>
+  <%=form_with(model: @karyawan, url: karyawan_path(@karyawan), method: :patch) do |form| %>
+    <div class="mb-3">
+      <%= form.label :nama %>
+      <%= form.text_field :nama, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%=form.label :alamat %>
+      <%=form.text_field :alamat, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :usia %>
+      <%= form.number_field :usia, class: "form-control" %>
+    </div>
+    <%= form.submit "Edit", class: "btn btn-primary"%>
+  <%end %>
+</div>

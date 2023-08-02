@@ -23,11 +23,14 @@ class KaryawansController < ApplicationController
   end
 
   def edit
+    @karyawan=Karyawan.find_by(id: params[:id])
   end
 
   def update
     if @karyawan.update(karyawan_params)
       redirect_to karyawans_path, notice: "Karyawan berhasil di update"
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
