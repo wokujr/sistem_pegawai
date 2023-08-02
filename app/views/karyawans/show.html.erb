@@ -1,14 +1,14 @@
 <h1><%= @karyawan.nama %></h1>
-<p><strong>Alamat:</strong> <%= @karyawan.alamat %></p>
-<p><strong>Usia:</strong> <%= @karyawan.usia %></p>
+<p>Alamat: <%= @karyawan.alamat %></p>
+<p>Usia: <%= @karyawan.usia %></p>
 
-<h2>Salary Information</h2>
-<% if @gaji %>
-  <p><strong>Gaji:</strong> <%= @gaji.gaji %></p>
-  <p><strong>ID Gaji:</strong> <%= @gaji.kode_gaji %></p>
+<% if @salary %>
+  <h2>Salary: <%= @salary.amount %></h2>
+  <p>Position: <%= @position.title %></p>
 <% else %>
-  <p>No salary information available for this employer.</p>
-  <%= link_to 'Informasi Gaji', new_karyawan_gaji_path(@karyawan) %>
+  <p>Salary and Position not available for this karyawan.</p>
 <% end %>
 
 <%= link_to 'Back', karyawans_path %>
+<%= link_to 'Edit', edit_karyawan_path(@karyawan) %>
+<%= link_to 'Delete', @karyawan, method: :delete, data: { confirm: 'Are you sure?' } %>

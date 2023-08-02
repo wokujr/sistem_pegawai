@@ -1,0 +1,8 @@
+<h1>List of Positions</h1>
+<ul>
+  <% @positions.each do |position| %>
+    <li>
+      <%= link_to position.title, position_path(position) %>
+    </li>
+  <% end %>
+</ul>

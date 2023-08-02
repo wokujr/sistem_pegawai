@@ -1,17 +1,14 @@
-<h1>New Salary Information</h1>
-
-<%= form_with model: @gaji, url: karyawan_gajis_path(@karyawan) do |form| %>
+<h1>New Salary Information <%= @karyawan.nama %></h1>
+<%= form_with(model:  [@karyawan, @salary], url: karyawan_salaries_path(@karyawan)) do |form| %>
   <div>
-    <%= form.label :gaji %>
-    <%= form.text_field :gaji %>
+    <%= form.label :amount %>
+    <%= form.number_field :amount %>
   </div>
-
   <div>
-    <%= form.label :kode_gaji %>
-    <%= form.text_field :kode_gaji %>
+    <%= form.label :position_id %>
+    <%= form.collection_select :position_id, Position.all, :id, :title %>
   </div>
-
-  <%= form.submit 'Buat informasi gaji' %>
+  <%= form.submit %>
 <% end %>
 
-<%= link_to 'Back', karaywan_path(@karyawan) %>
+<%= link_to 'Back', karyawan_path(@karyawan) %>

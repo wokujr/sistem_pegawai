@@ -11,13 +11,8 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_08_01_165730) do
-  create_table "karyawans", id: :string, force: :cascade do |t|
-    t.string "nama"
-    t.string "alamat"
-    t.integer "usia"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+# Could not dump table "karyawans" because of following StandardError
+#   Unknown type 'uuid' for column 'id'
 
   create_table "positions", force: :cascade do |t|
     t.string "title"
