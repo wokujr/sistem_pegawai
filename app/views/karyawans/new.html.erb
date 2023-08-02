@@ -18,13 +18,21 @@
       <%= form.number_field :usia, class: "form-control"%>
     </div>
 
-    <div class="mb-3">
-      <%= form.label :jabatan %>
-      <%= form.text_field :jabatan, class: "form-control" %>
-    </div>
+    <!-- Fields for Salary and Position -->
+    <%= form.fields_for :salary do |salary_form| %>
+      <div>
+        <%= salary_form.label :amount %>
+        <%= salary_form.number_field :amount, class: "form-control mb-4" %>
+      </div>
+      <div>
+        <%= salary_form.label :position_id %>
+        <%= salary_form.collection_select :position_id, Position.all, :id, :title, class: "form-label " %>
+      </div>
+    <% end %>
 
-    <%= form.submit "Tambahkan", class: "btn btn-primary" %>
-    <%= link_to "Back", karyawans_path, class: "btn btn-warning"%>
+
+    <%= form.submit "Tambahkan", class: "btn btn-primary mt-4" %>
+    <%= link_to "Back", karyawans_path, class: "btn btn-warning mt-4"%>
 
   <% end %>
 

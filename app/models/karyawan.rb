@@ -1,7 +1,9 @@
 class Karyawan < ApplicationRecord
-  has_one :salary
+
+  has_one :salary, inverse_of: :karyawan
   has_one :position, through: :salary
-  has_many :salaries
+
+  accepts_nested_attributes_for :salary, allow_destroy: true
 
   self.primary_key = :id
   before_create :generate_uuid
