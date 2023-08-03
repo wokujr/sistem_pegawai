@@ -1,11 +1,9 @@
 class SalariesController < ApplicationController
-
   def edit
     @karyawan = Karyawan.find_by(id: params[:id])
   end
   def new
     @karyawan = Karyawan.find_by(id: params[:id])
-    @salary = Salary.new
   end
   def create
     @karyawan = Karyawan.find_by(id: params[:karyawan_id])
@@ -13,7 +11,7 @@ class SalariesController < ApplicationController
       redirect_to karyawans_path, alert: "Karyawan tidak ditemukan"
       return
     end
-    @salary = karyawan.build.salary(salary_params)
+    @salary = @karyawan.build_salary(salary_params)
     if @salary.save
       redirect_to karyawan_path(@karyawan), notice: "Berhasil menambahkan Gaji"
     else
@@ -22,8 +20,10 @@ class SalariesController < ApplicationController
   end
 
   private
+
   def salary_params
     params.require(:salary).permit(:amount, :position_id)
   end
+
 
 end

@@ -1,0 +1,7 @@
+{
+  "name": "siste_pegawai",
+  "version": "1.0.0",
+  "dependencies": {
+    "controllers": "^0.0.2"
+  }
+}

@@ -1,14 +1,19 @@
-<h1>New Salary Information <%= @karyawan.nama %></h1>
-<%= form_with(model:  [@karyawan, @salary], url: karyawan_salaries_path(@karyawan)) do |form| %>
-  <div>
-    <%= form.label :amount %>
-    <%= form.number_field :amount %>
+<div class="container">
+  <div class="text-center ">
+    <h1>New Salary Information</h1>
   </div>
-  <div>
-    <%= form.label :position_id %>
-    <%= form.collection_select :position_id, Position.all, :id, :title %>
-  </div>
-  <%= form.submit %>
-<% end %>
+    <%= form_with(model: @salary, url: karyawan_salaries_path) do |form| %>
+      <div class="mb-3">
+        <%= form.label :amount, class: "form-label" %>
+        <%= form.number_field :amount, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :position_id, class: "form-label" %>
+        <%= form.collection_select :position_id, Position.all, :id, :title, class: "form-label" %>
+      </div>
+      <%= form.submit "Simpan", class: "btn btn-primary" %>
+    <% end %>
 
-<%= link_to 'Back', karyawan_path(@karyawan) %>
+    <%= link_to 'Back', karyawans_path(@karyawan), class: "btn btn-success mt-4" %>
+
+</div>

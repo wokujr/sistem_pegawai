@@ -22,11 +22,11 @@
     <%= form.fields_for :salary do |salary_form| %>
       <div>
         <%= salary_form.label :amount %>
-        <%= salary_form.number_field :amount, class: "form-control mb-4" %>
+        <%= salary_form.number_field :amount, class: "form-control mb-4", id: "salary-amount-field" %>
       </div>
       <div>
         <%= salary_form.label :position_id %>
-        <%= salary_form.collection_select :position_id, Position.all, :id, :title, class: "form-label " %>
+        <%= salary_form.collection_select :position_id, Position.all, :id, :title, class: "form-label", id: "position-select" %>
       </div>
     <% end %>
 
