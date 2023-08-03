@@ -1,0 +1,6 @@
+<%= form.fields_for :salary do |salary_form| %>
+  <div>
+    <%= salary_form.label :amount %>
+    <%= salary_form.number_field :amount %>
+  </div>
+<%end %>

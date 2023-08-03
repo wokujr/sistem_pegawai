@@ -16,6 +16,12 @@ class KaryawansController < ApplicationController
 
   def create
     @karyawan = Karyawan.new(karyawan_params)
+
+    if params[:karyawan][:position_id].present?
+      selected_position = Position.find(params[:karyawan][:position_id])
+      @karyawan.build_salary(amount: selected_position.salary)
+    end
+
     if @karyawan.save
       redirect_to karyawans_path, notice: "Berhasil menambahkan karyawan baru"
     else
@@ -47,6 +53,6 @@ class KaryawansController < ApplicationController
     @karyawan = Karyawan.find_by(id: params[:id])
   end
   def karyawan_params
-    params.require(:karyawan).permit(:nama, :alamat, :usia, :title, salary_attributes: [:amount, :position_id])
+    params.require(:karyawan).permit(:nama, :alamat, :usia, :title, :position_id)
   end
 end

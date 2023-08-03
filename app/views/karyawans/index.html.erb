@@ -8,6 +8,7 @@
       <th>Alamat</th>
       <th>Usia</th>
       <th>Action</th>
+      <th>Details</th>
     </tr>
     </thead>
 
@@ -17,6 +18,18 @@
         <td><%= karyawan.alamat %></td>
         <td><%= karyawan.usia %></td>
         <td><%= button_to "Delete", karyawan_path(karyawan),method: :delete, data:{turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?"}, class: "btn btn-danger" %></td>
+        <td>
+          <% if karyawan.salary.present?%>
+              <p>Salary: </p><%=karyawan.salary.amount %>
+            <%else %>
+              <p>Gaji belum di adakan :(</p>
+            <%end %>
+            <%if karyawan.position.present? %>
+              <p>Jabatan: <%=karyawan.position.title %></p>
+              <%else %>
+              <p>Belum di kasih mandat :)</p>
+            <%end %>
+        </td>
       </tr>
     <%end %>
 
