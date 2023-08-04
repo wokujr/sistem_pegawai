@@ -2,6 +2,7 @@
   "name": "siste_pegawai",
   "version": "1.0.0",
   "dependencies": {
-    "controllers": "^0.0.2"
+    "controllers": "^0.0.2",
+    "jquery": "^3.7.0"
   }
 }

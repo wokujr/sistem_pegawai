@@ -1,20 +1,17 @@
-<%=javascript_include_tag('test.js') %>
+
 
 <div class="container">
-
   <h1 class="text-center mb-4"> Tambahkan Karyawan Baru</h1>
-  <%= form_with model: @karyawan, data: { turbo: "false" } do |form| %>
 
+  <%= form_with model: @karyawan, data: { turbo: "false" } do |form| %>
     <div class="mb-3">
       <%= form.label :nama %>
       <%= form.text_field :nama, class: "form-control", placeholder: "Masukan Nama Karyawan" %>
     </div>
-
     <div class="mb-3">
       <%= form.label :alamat %>
       <%= form.text_field :alamat, class: "form-control" %>
     </div>
-
     <div class="mb-3">
       <%= form.label :usia %>
       <%= form.number_field :usia, class: "form-control"%>
@@ -23,35 +20,44 @@
     <!-- Fields for Salary and Position -->
     <%= form.fields_for :position do |salary_form| %>
 
-<!--      <div>-->
-        <%#= salary_form.label :position_id %>
-        <%#= salary_form.collection_select :position_id, Position.all, :id, :title, class: "form-select", id: "position-select" %>
-<!--      </div>-->
-
       <%= form_with model: @position do |f| %>
         <%= f.collection_select :position_id, Position.all, :id, :title, { include_blank: 'Pilih posisi' }, { class: "form-select", id: "position-select" } %>
       <% end %>
 
-<!--      <select class="form-select" aria-label="Default select example mt-4">-->
-<!--        <option >Pilih posisi</option>-->
-
-<!--        <option value="1">One</option>-->
-<!--        <option value="2">Two</option>-->
-<!--        <option value="3">Three</option>-->
-<!--      </select>-->
-
       <div>
         <%= salary_form.label :salary %>
-        <%= salary_form.number_field :salary, class: "form-control mb-4", id: "salary-amount-field" %>
+        <%= salary_form.number_field :salary, class: "form-control mb-4", id: "salary-amount-field", readonly: true %>
       </div>
+      <%= form.submit "Tambahkan", class: "btn btn-primary mt-4" %>
     <% end %>
 
-
-    <%= form.submit "Tambahkan", class: "btn btn-primary mt-4" %>
     <%= link_to "Back", karyawans_path, class: "btn btn-warning mt-4"%>
-
   <% end %>
-
-
 </div>
+
+
+<script>
+    const positionSelect = document.getElementById("position-select");
+    positionSelect.addEventListener("change", () => {
+        const selectedOption = positionSelect.value
+        console.log(selectedOption)
+        const xhr = new XMLHttpRequest()
+
+        xhr.open("GET", `http://localhost:3000/position/${selectedOption}`, true)
+
+        xhr.onload = () =>{
+            if(xhr.status === 200)
+            {
+                const responseData = JSON.parse(xhr.responseText)
+                const inputSalary = document.getElementById("salary-amount-field")
+                inputSalary.value = responseData.salary;
+            }
+            else
+            {
+                console.error("request failed")
+            }
+        }
+        xhr.send()
+    });
+</script>
 

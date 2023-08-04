@@ -1,10 +1,22 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const positionSelect = document.getElementById("position-select");
-    const salaryAmountField = document.getElementById("salary-amount-field");
-
+const positionSelect = document.getElementById("position-select");
     positionSelect.addEventListener("change", () => {
-        const selectedOption = positionSelect.options[positionSelect.selectedIndex];
-        const salaryAmount = selectedOption.dataset.salary;
-        salaryAmountField.value = salaryAmount;
+        const selectedOption = positionSelect.value
+        console.log(selectedOption)
+        const xhr = new XMLHttpRequest()
+
+        xhr.open("GET", `http://localhost:3000/position/${selectedOption}`, true)
+
+        xhr.onload = () =>{
+            if(xhr.status === 200)
+            {
+                const responseData = JSON.parse(xhr.responseText)
+                const inputSalary = document.getElementById("salary-amount-field")
+                inputSalary.value = responseData.salary;
+            }
+            else
+            {
+                console.error("request failed")
+            }
+        }
+        xhr.send()
     });
-});

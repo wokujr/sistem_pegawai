@@ -1,0 +1,70 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <div class="card card-body">
+        <form action="/employee/create" method="post" data-turbo-stream="false">
+          <div class="form-group">
+            <label>Nama</label>
+            <input class="form-control" type="text" name="nama">
+          </div>
+
+          <div class="form-group">
+            <label>Alamat</label>
+            <input class="form-control" type="text" name="alamat">
+          </div>
+
+          <div class="form-group">
+            <label>Usia</label>
+            <input class="form-control" type="number" name="usia">
+          </div>
+
+          <div class="form-group">
+            <label>Position</label>
+            <select name="position" class="form-select" id="position-select">
+              <option> Pilih posisi
+              </option>
+              <%@position.each do |p|%>
+                <option value="<%=p.id %>"> <%=p.title %> </option>
+              <%end %>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>salary</label>
+            <input class="form-control" type="number" name="salary" readonly id="salary-amount-field">
+          </div>
+
+          <button type="submit" class="btn btn-primary mt-3"> Tambah </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+
+      const positionSelect = document.getElementById("position-select");
+      positionSelect.addEventListener("change", () => {
+          const selectedOption = positionSelect.value;
+          console.log(selectedOption);
+          const xhr = new XMLHttpRequest();
+
+          xhr.open("GET", `http://localhost:3000/position/${selectedOption}`, true);
+
+          xhr.onload = () =>{
+              if(xhr.status === 200)
+              {
+                  const responseData = JSON.parse(xhr.responseText);
+                  const inputSalary = document.getElementById("salary-amount-field");
+                  inputSalary.value = responseData.salary;
+              }
+              else
+              {
+                  console.error("request failed");
+              }
+          };
+          xhr.send();
+      });
+
+
+</script>

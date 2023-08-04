@@ -1,22 +1,19 @@
 class KaryawansController < ApplicationController
-  before_action :set_karyawan, only: [:show, :edit, :update, :destroy]
   def index
     @karyawan = Karyawan.all
   end
 
   def show
     @salary = @karyawan.salary
-    @position = @karyawan.position
+    @position = Position.find_by(params[:id])
   end
 
   def new
     @karyawan = Karyawan.new
-    @karyawan.build_salary
   end
 
   def create
     @karyawan = Karyawan.new(karyawan_params)
-
     if @karyawan.save
       redirect_to karyawans_path, notice: "Berhasil menambahkan karyawan baru"
     else
