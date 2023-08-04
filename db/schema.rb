@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_01_165730) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_04_061245) do
 # Could not dump table "karyawans" because of following StandardError
 #   Unknown type 'uuid' for column 'id'
 
@@ -21,14 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_165730) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "salaries", force: :cascade do |t|
-    t.integer "karyawan_id", null: false
-    t.integer "position_id"
-    t.float "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["karyawan_id"], name: "index_salaries_on_karyawan_id"
-    t.index ["position_id"], name: "index_salaries_on_position_id"
-  end
+# Could not dump table "salaries" because of following StandardError
+#   Unknown type 'uuid' for column 'karyawan_id'
 
 end

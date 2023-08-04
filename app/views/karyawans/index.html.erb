@@ -1,3 +1,5 @@
+
+
 <div class="container">
   <h1 class="mb-4 d-flex align-items-center justify-content-center ">Karyawan</h1>
 
@@ -19,8 +21,9 @@
         <td><%= karyawan.usia %></td>
         <td><%= button_to "Delete", karyawan_path(karyawan),method: :delete, data:{turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?"}, class: "btn btn-danger" %></td>
         <td>
-          <% if karyawan.salary.present?%>
-              <p>Salary: </p><%=karyawan.salary.amount %>
+
+          <% if karyawan.position.present?%>
+              <p>Salary: </p><%=karyawan.position.salary %>
             <%else %>
               <p>Gaji belum di adakan :(</p>
             <%end %>
@@ -36,3 +39,4 @@
   </table>
   <%= link_to "Tambahkan karyawan", new_karyawan_path, class: "btn btn-primary" %>
 </div>
+

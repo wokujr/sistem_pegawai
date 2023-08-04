@@ -1,3 +1,5 @@
+<%=javascript_include_tag('test.js') %>
+
 <div class="container">
 
   <h1 class="text-center mb-4"> Tambahkan Karyawan Baru</h1>
@@ -19,14 +21,28 @@
     </div>
 
     <!-- Fields for Salary and Position -->
-    <%= form.fields_for :salary do |salary_form| %>
+    <%= form.fields_for :position do |salary_form| %>
+
+<!--      <div>-->
+        <%#= salary_form.label :position_id %>
+        <%#= salary_form.collection_select :position_id, Position.all, :id, :title, class: "form-select", id: "position-select" %>
+<!--      </div>-->
+
+      <%= form_with model: @position do |f| %>
+        <%= f.collection_select :position_id, Position.all, :id, :title, { include_blank: 'Pilih posisi' }, { class: "form-select", id: "position-select" } %>
+      <% end %>
+
+<!--      <select class="form-select" aria-label="Default select example mt-4">-->
+<!--        <option >Pilih posisi</option>-->
+
+<!--        <option value="1">One</option>-->
+<!--        <option value="2">Two</option>-->
+<!--        <option value="3">Three</option>-->
+<!--      </select>-->
+
       <div>
-        <%= salary_form.label :amount %>
-        <%= salary_form.number_field :amount, class: "form-control mb-4", id: "salary-amount-field" %>
-      </div>
-      <div>
-        <%= salary_form.label :position_id %>
-        <%= salary_form.collection_select :position_id, Position.all, :id, :title, class: "form-label", id: "position-select" %>
+        <%= salary_form.label :salary %>
+        <%= salary_form.number_field :salary, class: "form-control mb-4", id: "salary-amount-field" %>
       </div>
     <% end %>
 
