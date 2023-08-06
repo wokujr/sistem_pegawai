@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>EDIT <%=@karyawan.nama %></h1>
+  <h1>EDIT <%=@karyawan.name %></h1>
   <%=form_with(model: @karyawan, url: karyawan_path(@karyawan), method: :patch) do |form| %>
     <div class="mb-3">
       <%= form.label :nama %>

@@ -16,19 +16,16 @@
 
     <% @karyawan.each do |karyawan| %>
       <tr>
-        <td><%=link_to karyawan.nama, karyawan_path(karyawan) %></td>
-        <td><%= karyawan.alamat %></td>
-        <td><%= karyawan.usia %></td>
+        <td><%=link_to karyawan.name, karyawan_path(karyawan) %></td>
+        <td><%= karyawan.address %></td>
+        <td><%= karyawan.age %></td>
         <td><%= button_to "Delete", karyawan_path(karyawan),method: :delete, data:{turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?"}, class: "btn btn-danger" %></td>
         <td>
-          <% if karyawan.positions.any? %>
-            <% karyawan.positions.each do |pos| %>
-              <p>Salary: <%= pos.salary %></p>
-              <p>Jabatan: <%= pos.title %></p>
-            <% end %>
+          <% if karyawan.position.present? %>
+            <p>Salary: <%= karyawan.position.salary %></p>
+            <p>Jabatan: <%= karyawan.position.title %></p>
           <% else %>
-            <p>Gaji belum ada :(</p>
-            <p>Belum di kasih mandat :)</p>
+            <p>No Position Assigned</p>
           <% end %>
         </td>
       </tr>

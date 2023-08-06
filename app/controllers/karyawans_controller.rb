@@ -1,11 +1,12 @@
 class KaryawansController < ApplicationController
+  before_action :load_position
+
   def index
     @karyawan = Karyawan.all
   end
 
   def show
     @salary = @karyawan.salary
-    @position = Position.find_by(params[:id])
   end
 
   def new
@@ -18,6 +19,8 @@ class KaryawansController < ApplicationController
     if @karyawan.save
       redirect_to karyawans_path, notice: "Berhasil menambahkan karyawan baru"
     else
+      @position =Position.all
+      puts @karyawan.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end
@@ -46,7 +49,11 @@ class KaryawansController < ApplicationController
     @karyawan = Karyawan.find_by(id: params[:id])
   end
   def karyawan_params
-    params.require(:karyawan).permit(:nama, :alamat, :usia, posisions_attributes: [:salary, :title])
+    params.require(:karyawan).permit(:name, :address, :age, :position_id, :salary)
+  end
+
+  def load_position
+    @position = Position.all
   end
 end
 

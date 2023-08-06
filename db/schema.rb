@@ -10,19 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_06_054324) do
-# Could not dump table "karyawans" because of following StandardError
-#   Unknown type '' for column 'id'
+ActiveRecord::Schema[7.0].define(version: 2023_08_06_065500) do
+  create_table "karyawans", force: :cascade do |t|
+    t.string "name"
+    t.integer "age"
+    t.string "address"
+    t.integer "position_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["position_id"], name: "index_karyawans_on_position_id"
+  end
 
   create_table "positions", force: :cascade do |t|
     t.string "title"
-    t.float "salary"
+    t.decimal "salary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "karyawan_id"
-    t.index ["karyawan_id"], name: "index_positions_on_karyawan_id"
   end
 
-  add_foreign_key "karyawans", "positions"
-  add_foreign_key "positions", "karyawans"
 end
