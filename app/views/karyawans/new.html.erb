@@ -1,9 +1,7 @@
-
-
 <div class="container">
   <h1 class="text-center mb-4"> Tambahkan Karyawan Baru</h1>
+  <%= form_with model: @karyawan, url: karyawans_path ,data: { turbo: "false" } do |form| %>
 
-  <%= form_with model: @karyawan, data: { turbo: "false" } do |form| %>
     <div class="mb-3">
       <%= form.label :nama %>
       <%= form.text_field :nama, class: "form-control", placeholder: "Masukan Nama Karyawan" %>
@@ -17,47 +15,44 @@
       <%= form.number_field :usia, class: "form-control"%>
     </div>
 
-    <!-- Fields for Salary and Position -->
-    <%= form.fields_for :position do |salary_form| %>
+    <div class="form-group">
+      <label>Position</label>
+      <select name="position" class="form-select" id="position-select">
+        <option> Pilih posisi
+        </option>
+        <%@position.each do |p|%>
+          <option value="<%=p.id %>"> <%=p.title %> </option>
+        <%end %>
+      </select>
+    </div>
 
-      <%= form_with model: @position do |f| %>
-        <%= f.collection_select :position_id, Position.all, :id, :title, { include_blank: 'Pilih posisi' }, { class: "form-select", id: "position-select" } %>
-      <% end %>
+    <div class="form-group">
+      <label>salary</label>
+      <input class="form-control" type="number" name="salary" readonly id="salary-field">
+    </div>
 
-      <div>
-        <%= salary_form.label :salary %>
-        <%= salary_form.number_field :salary, class: "form-control mb-4", id: "salary-amount-field", readonly: true %>
-      </div>
-      <%= form.submit "Tambahkan", class: "btn btn-primary mt-4" %>
-    <% end %>
-
-    <%= link_to "Back", karyawans_path, class: "btn btn-warning mt-4"%>
-  <% end %>
+    <%= form.submit "Tambahkan", class: "btn btn-primary mt-4" %>
+  <%end %>
+  <%= link_to "Back", karyawans_path, class: "btn btn-warning mt-4"%>
 </div>
 
-
-<script>
-    const positionSelect = document.getElementById("position-select");
-    positionSelect.addEventListener("change", () => {
-        const selectedOption = positionSelect.value
-        console.log(selectedOption)
-        const xhr = new XMLHttpRequest()
-
-        xhr.open("GET", `http://localhost:3000/position/${selectedOption}`, true)
-
-        xhr.onload = () =>{
-            if(xhr.status === 200)
-            {
-                const responseData = JSON.parse(xhr.responseText)
-                const inputSalary = document.getElementById("salary-amount-field")
-                inputSalary.value = responseData.salary;
+<script type="text/javascript" charset="utf-8">
+    function setSalary(){
+        const positionSelect = document.getElementById("position-select");
+        const salaryField = document.getElementById("salary-field");
+        positionSelect.addEventListener("change", () => {
+            const selectedOption = positionSelect.value;
+            // Convert @position to JSON and insert it directly into the JavaScript
+            const positionData = <%= raw @position.to_json %>;
+            const selectedPosition = positionData.find((p) => p.id == selectedOption);
+            if (selectedPosition) {
+                salaryField.value = selectedPosition.salary;
+            } else {
+                // Clear the salary field if the selected position is not found
+                salaryField.value = "";
             }
-            else
-            {
-                console.error("request failed")
-            }
-        }
-        xhr.send()
-    });
+        });
+    }
+
+    document.addEventListener("turbo:load", setSalary)
 </script>
-

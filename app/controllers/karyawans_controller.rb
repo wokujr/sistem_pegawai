@@ -10,6 +10,7 @@ class KaryawansController < ApplicationController
 
   def new
     @karyawan = Karyawan.new
+    @position = Position.all
   end
 
   def create
@@ -45,6 +46,12 @@ class KaryawansController < ApplicationController
     @karyawan = Karyawan.find_by(id: params[:id])
   end
   def karyawan_params
-    params.require(:karyawan).permit(:nama, :alamat, :usia, :title, salary_attributes: [:amount, :position_id])
+    params.require(:karyawan).permit(:nama, :alamat, :usia, posisions_attributes: [:salary, :title])
   end
 end
+
+
+
+
+
+

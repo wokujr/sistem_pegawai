@@ -3,25 +3,26 @@
 # incrementally modify your database, and then regenerate this schema definition.
 #
 # This file is the source Rails uses to define your schema when running `bin/rails
-# db:schema:load`. When creating a new.html.erb database, `bin/rails db:schema:load` tends to
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_04_061245) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_06_054324) do
 # Could not dump table "karyawans" because of following StandardError
-#   Unknown type 'uuid' for column 'id'
+#   Unknown type '' for column 'id'
 
   create_table "positions", force: :cascade do |t|
     t.string "title"
     t.float "salary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "karyawan_id"
+    t.index ["karyawan_id"], name: "index_positions_on_karyawan_id"
   end
 
-# Could not dump table "salaries" because of following StandardError
-#   Unknown type 'uuid' for column 'karyawan_id'
-
+  add_foreign_key "karyawans", "positions"
+  add_foreign_key "positions", "karyawans"
 end

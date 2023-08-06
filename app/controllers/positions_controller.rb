@@ -1,31 +1,20 @@
 class PositionsController < ApplicationController
-
+  def new
+    @position = Position.new
+  end
   def create
-    @position = Position.find(params[:id])
+    @position = Position.new(position_params)
     if @position.save
       redirect_to karyawans_path, notice: "SUCCESS ADD"
-    end
-  end
-
-  def show
-    @position = Position.find_by(id: params[:id])
-    render json: @position
-  end
-
-  def update
-    @position = Position.find(params[:id])
-    if @position.update(salary_form_params)
-      redirect_to karyawans_path, notice: "SUCCESS"
     else
-      render :new, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
-
   end
 
   private
 
-  def salary_form_params
-    params.require(:salary_form).permit(:salary)
+  def position_params
+    params.require(:position).permit(:salary, :title)
   end
 
 end

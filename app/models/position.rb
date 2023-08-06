@@ -1,5 +1,6 @@
 class Position < ApplicationRecord
-  has_many :salaries
-  has_many :karyawans, through: :salaries
+
+  belongs_to :karyawan
+  validates :karyawan_id, presence: true
 
 end

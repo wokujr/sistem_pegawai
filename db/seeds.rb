@@ -8,8 +8,4 @@ karyawan2 = Karyawan.create(nama: "jane", alamat: "somwhere b", usia: 43)
 karyawan3 = Karyawan.create(nama: "jun", alamat: "somwhere c", usia: 33)
 karyawan4 = Karyawan.create(nama: "jay", alamat: "somwhere d", usia: 23)
 
-Salary.create(karyawan: karyawan1, position: position1)
-Salary.create(karyawan: karyawan2, position: position2)
-Salary.create(karyawan: karyawan3, position: position3)
-Salary.create(karyawan: karyawan4, position: position4)
 
