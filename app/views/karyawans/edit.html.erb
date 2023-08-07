@@ -1,18 +1,62 @@
 <div class="container">
-  <h1>EDIT <%=@karyawan.name %></h1>
-  <%=form_with(model: @karyawan, url: karyawan_path(@karyawan), method: :patch) do |form| %>
+  <h1>Edit <%=@karyawan.name %> Information </h1>
+  <%=form_with(model: [@position, @karyawan],url: karyawan_path(@karyawan), local: true, method: :patch) do |form| %>
+    <!--error message-->
+    <%=render 'shared/error_alert', form: form %>
+
     <div class="mb-3">
-      <%= form.label :nama %>
-      <%= form.text_field :nama, class: "form-control" %>
+      <%= form.label :name %>
+      <%= form.text_field :name, class: "form-control" %>
     </div>
     <div class="mb-3">
-      <%=form.label :alamat %>
-      <%=form.text_field :alamat, class: "form-control" %>
+      <%=form.label :address %>
+      <%=form.text_field :address, class: "form-control" %>
     </div>
     <div class="mb-3">
-      <%= form.label :usia %>
-      <%= form.number_field :usia, class: "form-control" %>
+      <%= form.label :age %>
+      <%= form.number_field :age, class: "form-control" %>
     </div>
-    <%= form.submit "Confirm", class: "btn btn-primary"%>
+
+
+    <div class="form-group">
+      <label>Position</label>
+      <select name="karyawan[position_id]" class="form-select" id="position-select">
+        <option> Pilih posisi </option>
+        <%@position.each do |p|%>
+          <option value="<%=p.id %>"> <%=p.title %> </option>
+        <%end %>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>salary</label>
+      <input class="form-control" type="number" name="salary" readonly id="salary-field">
+    </div>
+
+    <%= form.submit "Confirm", class: "btn btn-primary mt-4", data:{turbo_confirm:"Are you sure?"}%>
   <%end %>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+    function setSalary(){
+        const positionSelect = document.getElementById("position-select");
+        const salaryField = document.getElementById("salary-field");
+
+        positionSelect.addEventListener("change", () => {
+            const selectedOption = positionSelect.value;
+
+            // Convert @position to JSON and insert it directly into the JavaScript
+            const positionData = <%= raw @position.to_json %>;
+
+            const selectedPosition = positionData.find((p) => p.id == selectedOption);
+            if (selectedPosition) {
+                salaryField.value = selectedPosition.salary;
+            } else {
+                // Clear the salary field if the selected position is not found
+                salaryField.value = "";
+            }
+        });
+    }
+
+    document.addEventListener("turbo:load", setSalary)
+</script>

@@ -1,21 +1,22 @@
 <div class="container">
-  <h1 class="text-center mt-4 mb-4 border border-3 p-2 border-primary"><%= @karyawan.nama %></h1>
+  <h1 class="text-center mt-4 mb-4 border border-3 p-2 border-primary"><%= @karyawan.name %></h1>
   <table class="table table-bordered border-success border-2">
-    <td><p>Alamat: <%= @karyawan.alamat %></p></td>
-    <td><p>Usia: <%= @karyawan.usia %></p></td>
-    <% if @salary %>
-      <td><p>Salary: <%= @position.salary %></p></td>
-      <td><p>Position: <%= @position.title %></p></td>
+    <td><p>Alamat: <%= @karyawan.address %></p></td>
+    <td><p>Usia: <%= @karyawan.age %></p></td>
+
+    <% if @karyawan.position %>
+      <td><p>Salary: <%= @karyawan.position.title %></p></td>
+      <td><p>Position: <%= @karyawan.position.salary %></p></td>
       <% else %>
       <p><strong>Gaji dan Jabatan not available for this karyawan.</strong></p>
-      <%= link_to "Tambahkan Gaji", new_karyawan_salary_path(@karyawan), class: "btn btn-primary mb-4 mx-2" %>
-      <%= link_to "Tambahkan Jabatan", new_karyawan_position_path(@karyawan), class: "btn btn-success mb-4" %>
+      <%= link_to "Tambahkan Gaji", new_karyawan_path(@karyawan), class: "btn btn-primary mb-4 mx-2" %>
+      <%= link_to "Tambahkan Jabatan", new_karyawan_path(@karyawan), class: "btn btn-success mb-4" %>
   <% end %>
   </table>
 
   <%= link_to 'Back', karyawans_path, class: "btn btn-warning" %>
   <%= link_to 'Edit', edit_karyawan_path(@karyawan), class: "btn btn-success"%>
-  <%= link_to 'Delete', @karyawan, method: :delete, data:{turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?"}, class: "btn btn-danger" %>
+  <%= link_to 'Delete', karyawan_path(@karyawan), method: :delete, data:{turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?"}, class: "btn btn-danger" %>
 
 </div>
 

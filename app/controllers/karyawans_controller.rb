@@ -5,13 +5,9 @@ class KaryawansController < ApplicationController
     @karyawan = Karyawan.all
   end
 
-  def show
-    @salary = @karyawan.salary
-  end
-
   def new
     @karyawan = Karyawan.new
-    @position = Position.all
+    load_position
   end
 
   def create
@@ -19,22 +15,28 @@ class KaryawansController < ApplicationController
     if @karyawan.save
       redirect_to karyawans_path, notice: "Berhasil menambahkan karyawan baru"
     else
-      @position =Position.all
+      load_position
       puts @karyawan.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end
 
   def edit
-    set_karyawan
+    find_karyawan
   end
 
   def update
+    find_karyawan
     if @karyawan.update(karyawan_params)
       redirect_to karyawans_path, notice: "Karyawan berhasil di update"
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @karyawan = find_karyawan
+    load_position
   end
 
   def destroy
@@ -45,8 +47,8 @@ class KaryawansController < ApplicationController
 
   private
 
-  def set_karyawan
-    @karyawan = Karyawan.find_by(id: params[:id])
+  def find_karyawan
+    @karyawan = Karyawan.find(params[:id])
   end
   def karyawan_params
     params.require(:karyawan).permit(:name, :address, :age, :position_id, :salary)

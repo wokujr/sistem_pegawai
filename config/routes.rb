@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  resources :karyawans, only: [:index, :show, :create, :new]
+  resources :karyawans, only: [:index, :show, :create, :new, :edit, :update, :destroy]
   resources :positions, only: [:new, :create, :show]
-
 
   get "/position/:id", to: "positions#show"
   get "/positions", to:"positions#index"
