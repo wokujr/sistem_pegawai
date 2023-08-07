@@ -1,5 +1,14 @@
 class UsersController < ApplicationController
   # before_save{ self.email = email.downcase}
+
+  def index
+    @user = User.all
+  end
+
+  def show
+    @user = User.find(params[:id])
+  end
+
   def new
     @user = User.new
   end
@@ -11,6 +20,16 @@ class UsersController < ApplicationController
     else
       render 'new', status: :unprocessable_entity, turbo_stream: false
     end
+
+    #Patch Part
+    def edit      #for view
+      @user = User.find(params[:id])
+
+    end
+    def update    #actual patch
+
+    end
+
 
   end
 

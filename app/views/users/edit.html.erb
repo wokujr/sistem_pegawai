@@ -1,9 +1,10 @@
+<h1 class="text-center mb-3 mt-4"> Edit User</h1>
+
 <div class="container">
   <div class="row justify-content-center mt-4">
     <div class="col-10">
 
       <%= form_with(model: @user, class: "shadow p-3 mb-3 bg-info rounded", local: true) do |f| %>
-        <%= render 'shared/error_alert', form: f %>
 
         <div class="form-group row mb-3">
           <%= f.label :username, class: "col-2 col-form-label text-light" %>
@@ -32,8 +33,8 @@
 
       <% end %>
     </div>
-    <div class="mb-3 text-center mt-4">
-      <%= link_to '[ Cancel and return to listing ]', root_path, class: "text-info" %>
+    <div class="mb-3 text-center mt-4 border border-2 w-25 border-info">
+      <%= link_to '[ Cancel and return to listing ]', users_path, class: "text-info" %>
     </div>
   </div>
 </div>
