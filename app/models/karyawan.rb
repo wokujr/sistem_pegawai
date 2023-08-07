@@ -4,6 +4,7 @@ class Karyawan < ApplicationRecord
   validates :address, presence: true, length: {minimum: 1}
 
   belongs_to :position
+  belongs_to :user
 
   self.primary_key = :id
   before_create :generate_uuid

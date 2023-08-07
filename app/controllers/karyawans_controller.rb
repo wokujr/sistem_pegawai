@@ -13,7 +13,7 @@ class KaryawansController < ApplicationController
   def create
     @karyawan = Karyawan.new(karyawan_params)
     if @karyawan.save
-      redirect_to karyawans_path, notice: "Berhasil menambahkan karyawan baru"
+      redirect_to root_path, notice: "Berhasil menambahkan karyawan baru"
     else
       load_position
       puts @karyawan.errors.full_messages
@@ -28,7 +28,7 @@ class KaryawansController < ApplicationController
   def update
     find_karyawan
     if @karyawan.update(karyawan_params)
-      redirect_to karyawans_path, notice: "Karyawan berhasil di update"
+      redirect_to root_path, notice: "Karyawan berhasil di update"
     else
       render :edit, status: :unprocessable_entity
     end
