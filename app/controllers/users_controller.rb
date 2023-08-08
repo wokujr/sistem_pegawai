@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @karaywan = @user.karyawan
+    @karyawan = @user.karyawan
   end
 
   def new

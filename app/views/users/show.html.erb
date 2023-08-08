@@ -1,6 +1,23 @@
 <h1 class="mb-4 d-flex align-items-center justify-content-center"> <%= @user.username %>'s profile' </h1>
-<%=profile_img @user, size:200%>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-8 mt-4">
+      <div class="card text-center shadow mb-5 bg-white rounded">
+        <div class="card-header font-italic">
+          <p> <%= @user.username %> </p>
+          <%=profile_img @user, size:200%>
+          <h2>Karyawan detail:</h2>
+          <% @karyawan.each do |karyawan| %>
+            <p><strong>Name:</strong> <%= karyawan.name %></p>
+            <p><strong>Age:</strong> <%= karyawan.age %></p>
+            <p><strong>Address:</strong> <%= karyawan.address %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<div class="mt-4 text-center">
+<div class="mb-4 text-center ">
   <%= link_to "Edit user", edit_user_path, class: "btn btn-outline-primary btn-lg w-25" %>
 </div>
