@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_id_user, only: [:show, :edit, :update]
+
   def index
     @user = User.all
   end
@@ -20,20 +21,19 @@ class UsersController < ApplicationController
     else
       render 'new', status: :unprocessable_entity
     end
+  end
 
-    #Patch Part
-    def edit      #for view
-      if @user.nil?
-        redirect_to root_path, alert: "NIL HAPPENED"
-      end
+  #Patch Part
+  def edit      #for view
+    if @user.nil?
+      redirect_to root_path, alert: "NIL HAPPENED"
     end
-    def update    #actual patch
-      if @user.update(user_params)
-        flash[:notice] = "Your account information was successfully updated"
-        redirect_to users_path
-      else
-        render 'edit'
-      end
+  end
+  def update    #actual patch
+    if @user.update(user_params)
+      redirect_to users_path, notice: "Your account information was successfully updated"
+    else
+      render 'edit', status: :unprocessable_entity
     end
   end
 

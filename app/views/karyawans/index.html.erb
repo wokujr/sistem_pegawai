@@ -7,8 +7,9 @@
       <th class="text-center">Nama</th>
       <th class="text-center">Alamat</th>
       <th class="text-center">Usia</th>
-      <th class="text-center">Action</th>
       <th class="text-center">Details</th>
+      <th class="text-center">Action</th>
+      <th class="text-center">Admin</th>
     </tr>
     </thead>
 
@@ -17,13 +18,6 @@
         <td><%=link_to karyawan.name, karyawan_path(karyawan) %></td>
         <td><%= karyawan.address %></td>
         <td><%= karyawan.age %></td>
-        <td class="d-flex align-items-center justify-item-center ">
-          <%= button_to "Delete", karyawan_path(karyawan),method: :delete, data:{turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?"}, class: "btn btn-danger mx-2" %>
-          <%= link_to "Edit", edit_karyawan_path(karyawan), class: "btn btn-success mx-2" %>
-          <%= link_to "Edit User Information", edit_user_path(karyawan), class: "btn btn-success mx-2" %>
-
-        </td>
-
         <td>
           <% if karyawan.position.present? %>
             <p>Salary: <%= karyawan.position.salary %></p>
@@ -31,6 +25,15 @@
           <% else %>
             <p>No Position Assigned</p>
           <% end %>
+        </td>
+        <td class="d-flex justify-content-center">
+          <%= button_to "Delete", karyawan_path(karyawan),method: :delete, data:{turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?"}, class: "btn btn-danger mx-2" %>
+          <%= link_to "Edit", edit_karyawan_path(karyawan), class: "btn btn-success mx-2" %>
+          <%= link_to "Edit User Information", edit_user_path(karyawan.user.id), class: "btn btn-success mx-2" %>
+        </td>
+
+        <td class="text-center">
+          <p>Added by: <%=karyawan.user.username %></p>
         </td>
       </tr>
     <%end %>

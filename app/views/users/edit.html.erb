@@ -5,6 +5,13 @@
     <div class="col-10">
 
       <%= form_with(model: @user, class: "shadow p-3 mb-3 bg-info rounded", local: true, method: :patch) do |f| %>
+        <% if f.object.errors.any? %>
+          <div class="alert alert-danger">
+            <% f.object.errors.full_message do |message| %>
+              <div> <%=message %></div>
+            <%end %>
+          </div>
+        <%end %>
 
         <div class="form-group row mb-3">
           <%= f.label :username, class: "col-2 col-form-label text-light" %>
@@ -28,7 +35,7 @@
         </div>
 
         <div class="form-group row justify-content-center">
-          <%= f.submit class: "btn btn-outline-light btn-lg w-25" %>
+          <%= f.submit class: "btn btn-outline-light btn-lg w-25", data: {turbo_method: :patch} %>
         </div>
 
       <% end %>

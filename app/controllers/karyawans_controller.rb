@@ -3,6 +3,7 @@ class KaryawansController < ApplicationController
 
   def index
     @karyawan = Karyawan.all
+    @user= current_user
   end
 
   def new
@@ -12,9 +13,9 @@ class KaryawansController < ApplicationController
 
   def create
     @karyawan = Karyawan.new(karyawan_params)
-    @karyawan = current_user
+    @karyawan.user = current_user
     if @karyawan.save
-      redirect_to root_path, notice: "Berhasil menambahkan karyawan baru"
+      redirect_to karyawans_path, notice: "Berhasil menambahkan karyawan baru"
     else
       load_position
       puts @karyawan.errors.full_messages
@@ -29,14 +30,14 @@ class KaryawansController < ApplicationController
   def update
     find_karyawan
     if @karyawan.update(karyawan_params)
-      redirect_to root_path, notice: "Karyawan berhasil di update"
+      redirect_to karyawan_path(@karyawan), notice: "Karyawan berhasil di update"
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def show
-    @karyawan = find_karyawan
+    @karyawan = Karyawan.find(params[:id])
     load_position
   end
 

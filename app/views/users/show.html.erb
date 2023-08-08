@@ -1,3 +1,6 @@
 <h1 class="mb-4 d-flex align-items-center justify-content-center"> <%= @user.username %>'s profile' </h1>
 <%=profile_img @user, size:200%>
 
+<div class="mt-4 text-center">
+  <%= link_to "Edit user", edit_user_path, class: "btn btn-outline-primary btn-lg w-25" %>
+</div>
