@@ -12,6 +12,7 @@ class KaryawansController < ApplicationController
 
   def create
     @karyawan = Karyawan.new(karyawan_params)
+    @karyawan = current_user
     if @karyawan.save
       redirect_to root_path, notice: "Berhasil menambahkan karyawan baru"
     else
