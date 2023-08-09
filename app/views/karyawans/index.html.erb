@@ -5,39 +5,55 @@
     <thead>
     <tr>
       <th class="text-center">Nama</th>
-      <th class="text-center">Alamat</th>
       <th class="text-center">Usia</th>
-      <th class="text-center">Details</th>
+      <th class="text-center">Alamat</th>
+      <th class="text-center">Jabatan</th>
+      <th class="text-center">Salary</th>
       <th class="text-center">Action</th>
-      <th class="text-center">Admin</th>
     </tr>
     </thead>
 
-    <% @karyawan.each do |karyawan| %>
       <tr>
-        <td><%=link_to karyawan.name, karyawan_path(karyawan) %></td>
-        <td><%= karyawan.address %></td>
-        <td><%= karyawan.age %></td>
-        <td>
-          <% if karyawan.position.present? %>
-            <p>Salary: <%= karyawan.position.salary %></p>
-            <p>Jabatan: <%= karyawan.position.title %></p>
-          <% else %>
-            <p>No Position Assigned</p>
-          <% end %>
-        </td>
+        <td><%=link_to @user.karyawan.name, user_path(@user) %></td>
+        <td><%= @user.karyawan.age %></td>
+        <td><%= @user.karyawan.address %></td>
+        <td><%= @user.karyawan.position.title %></td>
+        <td><%= @user.karyawan.position.salary %></td>
         <td class="d-flex justify-content-center">
-          <% if logged_in? && karyawan.user == current_user %>
-            <%= button_to "Delete", karyawan_path(karyawan),method: :delete, data:{turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?"}, class: "btn btn-danger mx-2" %>
-            <%= link_to "Edit", edit_karyawan_path(karyawan), class: "btn btn-success mx-2" %>
-            <%= link_to "Edit User Information", edit_user_path(karyawan.user.id), class: "btn btn-success mx-2" %>
+          <% if logged_in? && @user == current_user %>
+            <%= button_to "Delete", user_path(@user),method: :delete, data:{turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?"}, class: "btn btn-danger mx-2" %>
+            <%= link_to "Edit User", edit_user_path(@user), class: "btn btn-success mx-2" %>
           <%end %>
         </td>
-        <td class="text-center">
-          <p>Added by: <%=karyawan.user.username %></p>
-        </td>
+
       </tr>
-    <%end %>
+
+
+    <%# @karyawan.each do |karyawan| %>
+<!--      <tr>-->
+<!--        <td><%#=link_to karyawan.name, karyawan_path(karyawan) %></td>-->
+<!--        <td><%#= karyawan.address %></td>-->
+<!--        <td><%#= karyawan.age %></td>-->
+<!--        <td>-->
+          <%# if karyawan.position.present? %>
+<!--            <p>Salary: <%#= karyawan.position.salary %></p>-->
+<!--            <p>Jabatan: <%#= karyawan.position.title %></p>-->
+          <%# else %>
+<!--            <p>No Position Assigned</p>-->
+          <%# end %>
+<!--        </td>-->
+<!--        <td class="d-flex justify-content-center">-->
+          <%# if logged_in? && karyawan.user == current_user %>
+            <%#= button_to "Delete", karyawan_path(karyawan),method: :delete, data:{turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?"}, class: "btn btn-danger mx-2" %>
+            <%#= link_to "Edit", edit_karyawan_path(karyawan), class: "btn btn-success mx-2" %>
+            <%#= link_to "Edit User Information", edit_user_path(karyawan.user.id), class: "btn btn-success mx-2" %>
+          <%#end %>
+<!--        </td>-->
+<!--        <td class="text-center">-->
+<!--          <p>Added by: <%#=karyawan.user.username %></p>-->
+<!--        </td>-->
+<!--      </tr>-->
+    <%#end %>
   </table>
   <% if logged_in?%>
     <%= link_to "Tambahkan karyawan", new_karyawan_path, class: "btn btn-primary" %>

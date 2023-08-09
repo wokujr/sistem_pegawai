@@ -5,6 +5,7 @@ class Karyawan < ApplicationRecord
 
   belongs_to :position
   belongs_to :user
+  has_many :clocks
 
   self.primary_key = :id
   before_create :generate_uuid

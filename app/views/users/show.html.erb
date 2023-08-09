@@ -7,11 +7,9 @@
           <p> <%= @user.username %> </p>
           <%=profile_img @user, size:200%>
           <h2>Karyawan detail:</h2>
-          <% @karyawan.each do |karyawan| %>
-            <p><strong>Name:</strong> <%= karyawan.name %></p>
-            <p><strong>Age:</strong> <%= karyawan.age %></p>
-            <p><strong>Address:</strong> <%= karyawan.address %></p>
-          <% end %>
+            <p><strong>Name:</strong> <%= @karyawan.name %></p>
+            <p><strong>Age:</strong> <%= @karyawan.age %></p>
+            <p><strong>Address:</strong> <%= @karyawan.address %></p>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :karyawan
+  has_one :karyawan
+  has_many :clocks
 
   validates :username, presence:true, uniqueness: {case_sensitive: false}
 

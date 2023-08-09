@@ -2,7 +2,6 @@ class KaryawansController < ApplicationController
   before_action :load_position
 
   def index
-    @karyawan = Karyawan.all
     @user= current_user
   end
 
