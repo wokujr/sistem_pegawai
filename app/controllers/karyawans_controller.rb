@@ -1,5 +1,6 @@
 class KaryawansController < ApplicationController
   before_action :load_position
+  before_action :require_user, except: [:index]
 
   def index
     @user= current_user
@@ -61,9 +62,4 @@ class KaryawansController < ApplicationController
     @position = Position.all
   end
 end
-
-
-
-
-
 

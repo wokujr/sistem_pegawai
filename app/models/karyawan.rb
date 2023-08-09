@@ -12,5 +12,4 @@ class Karyawan < ApplicationRecord
   def generate_uuid
     self.id ||= SecureRandom.uuid
   end
-
 end

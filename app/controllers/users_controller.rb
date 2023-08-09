@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_id_user, only: [:show, :edit, :update]
+  before_action :require_user, except: [:index]
 
   def index
     @user = User.all
@@ -60,7 +61,6 @@ class UsersController < ApplicationController
 
   def clock_data
     @user = User.all
-
   end
   #End of Additional method
 

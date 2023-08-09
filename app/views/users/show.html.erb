@@ -9,9 +9,9 @@
           <%=profile_img @user, size:200%>
         </div>
         <div class="card-body">
-          <div class="container">
+          <div class="container text-start">
             <% if @karyawan %>
-              <h2>Karyawan detail:</h2>
+              <h2 class="text-center">Karyawan detail:</h2>
               <p><strong>Name:</strong> <%= @karyawan.name %></p>
               <p><strong>Age:</strong> <%= @karyawan.age %></p>
               <p><strong>Address:</strong> <%= @karyawan.address %></p>
