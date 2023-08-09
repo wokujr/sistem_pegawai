@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 
   def index
     @user = User.all
-    @clock = User.all.includes(:clocks)
   end
 
   def show
@@ -43,9 +42,9 @@ class UsersController < ApplicationController
     set_id_user
     @clock = @user.clocks.create(clock_in: true, event_time: Time.now.in_time_zone('Jakarta'))
     if @clock.persisted?
-      redirect_to users_path, notice: "Clocked in Successfully"
+      redirect_to clock_data_path, notice: "Clocked in Successfully"
     else
-      redirect_to users_path, alert: "Unable to Clock-In"
+      redirect_to clock_data_path, alert: "Unable to Clock-In"
     end
   end
 
@@ -53,10 +52,15 @@ class UsersController < ApplicationController
     set_id_user
     @clock = @user.clocks.create(clock_in: false , event_time: Time.now)
     if @clock.persisted?
-      redirect_to users_path, notice: "Clocked Out!"
+      redirect_to clock_data_path, notice: "Clocked Out!"
     else
-      redirect_to users_path, alert: "Unable to Clock Out"
+      redirect_to clock_data_path, alert: "Unable to Clock Out"
     end
+  end
+
+  def clock_data
+    @user = User.all
+
   end
   #End of Additional method
 

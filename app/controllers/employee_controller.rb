@@ -1,5 +1,4 @@
 class EmployeeController < ApplicationController
-
   def new
     @position = Position.all
   end

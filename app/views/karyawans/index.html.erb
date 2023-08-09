@@ -1,6 +1,6 @@
 <div class="container">
+  <%if logged_in? && @user == current_user%>
   <h1 class="mb-4 d-flex align-items-center justify-content-center ">Karyawan</h1>
-
   <table class="table mt-4 table-bordered">
     <thead>
     <tr>
@@ -25,8 +25,16 @@
             <%= link_to "Edit User", edit_user_path(@user), class: "btn btn-success mx-2" %>
           <%end %>
         </td>
-
       </tr>
+  </table>
+    <% if logged_in?%>
+      <%= link_to "Tambahkan karyawan", new_karyawan_path, class: "btn btn-primary" %>
+    <% end %>
+  <%else %>
+    <h1 class="text-center mt-4"> You have to be our Employee to do that </h1>
+  <%end %>
+</div>
+
 
 
     <%# @karyawan.each do |karyawan| %>
@@ -54,9 +62,3 @@
 <!--        </td>-->
 <!--      </tr>-->
     <%#end %>
-  </table>
-  <% if logged_in?%>
-    <%= link_to "Tambahkan karyawan", new_karyawan_path, class: "btn btn-primary" %>
-  <% end %>
-</div>
-

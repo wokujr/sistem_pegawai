@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     end
   end
 
+  #clock in
+  get 'clock_data', to: "users#clock_data"
+
   #LOGIN
   get 'login', to: "sessions#new"
   post 'login', to: "sessions#create"

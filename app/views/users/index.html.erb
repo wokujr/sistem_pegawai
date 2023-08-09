@@ -1,12 +1,13 @@
 <div class="container">
   <h1 class="mb-4 d-flex align-items-center justify-content-center"> User List </h1>
   <table class="table mt-4 table-bordered">
+
     <thead>
-    <tr>
-      <th class="text-center">Nama</th>
-      <th class="text-center">Alamat</th>
-      <th class="text-center">Action</th>
-    </tr>
+      <tr>
+        <th class="text-center">Nama</th>
+        <th class="text-center">Alamat</th>
+        <th class="text-center">Action</th>
+      </tr>
     </thead>
 
     <% @user.each do |user| %>
@@ -18,31 +19,7 @@
           <%= link_to "Edit User", edit_user_path(user), class: "btn btn-success mx-2" %>
         </td>
       </tr>
-    <%end %>
-  </table>
-
-  <table class="table table-bordered mb-4">
-    <tbody>
-    <% @user.each do |user| %>
-    <tr>
-      <td><%= user.karyawan.name %></td>
-      <td>
-        <%if user.clocks.last&.clock_in %>
-          Clocked In since: <%=user.clocks.last.event_time.strftime('%Y-%m-%d %H:%M:%S') %>
-        <%else %>
-          Not Clocked In
-        <%end %>
-      </td>
-      <td>
-        <% if user.clocks.last&.clock_in %>
-          <%= link_to 'Clock Out', clock_out_user_path(user), data: {turbo_method: :post} %>
-        <% else %>
-          <%= link_to 'Clock In', clock_in_user_path(user), data: {turbo_method: :post} %>
-        <% end %>
-      </td>
-    </tr>
-      <%end %>
-    </tbody>
+    <% end %>
   </table>
 
   <%= link_to "Back", users_path, class: "btn btn-warning mx-auto" %>

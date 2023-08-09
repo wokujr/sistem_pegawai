@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   def new
   end
 
@@ -7,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
-      redirect_to user , notice: "Successfully Logged In"
+      redirect_to user_path(user) , notice: "Successfully Logged In"
     else
       flash.now[:alert] = "There is Something wrong with your login details"
       render 'new', status: :unprocessable_entity
