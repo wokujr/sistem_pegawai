@@ -21,5 +21,29 @@
     <%end %>
   </table>
 
+  <table class="table table-bordered mb-4">
+    <tbody>
+    <% @user.each do |user| %>
+    <tr>
+      <td><%= user.karyawan.name %></td>
+      <td>
+        <%if user.clocks.last&.clock_in %>
+          Clocked In since: <%=user.clocks.last.event_time.strftime('%Y-%m-%d %H:%M:%S') %>
+        <%else %>
+          Not Clocked In
+        <%end %>
+      </td>
+      <td>
+        <% if user.clocks.last&.clock_in %>
+          <%= link_to 'Clock Out', clock_out_user_path(user), data: {turbo_method: :post} %>
+        <% else %>
+          <%= link_to 'Clock In', clock_in_user_path(user), data: {turbo_method: :post} %>
+        <% end %>
+      </td>
+    </tr>
+      <%end %>
+    </tbody>
+  </table>
+
   <%= link_to "Back", users_path, class: "btn btn-warning mx-auto" %>
 </div>

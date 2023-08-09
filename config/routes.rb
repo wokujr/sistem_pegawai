@@ -2,7 +2,12 @@ Rails.application.routes.draw do
   resources :karyawans, only: [:index, :show, :create, :new, :edit, :update, :destroy]
 
   get 'signup', to: 'users#new'
-  resources :users, except: [:new]
+  resources :users, except: [:new] do
+    member do
+      post :clock_in
+      post :clock_out
+    end
+  end
 
   #LOGIN
   get 'login', to: "sessions#new"

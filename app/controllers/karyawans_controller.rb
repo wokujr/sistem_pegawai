@@ -37,7 +37,9 @@ class KaryawansController < ApplicationController
 
   def show
     @karyawan = Karyawan.find(params[:id])
+    @karyawan.user = current_user
     load_position
+    @user = User.all
   end
 
   def destroy

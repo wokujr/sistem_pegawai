@@ -4,12 +4,22 @@
     <div class="col-8 mt-4">
       <div class="card text-center shadow mb-5 bg-white rounded">
         <div class="card-header font-italic">
-          <p> <%= @user.username %> </p>
+          <%= link_to @user.username, karyawan_path(@user), class: "fs-3" %>
+
           <%=profile_img @user, size:200%>
-          <h2>Karyawan detail:</h2>
-            <p><strong>Name:</strong> <%= @karyawan.name %></p>
-            <p><strong>Age:</strong> <%= @karyawan.age %></p>
-            <p><strong>Address:</strong> <%= @karyawan.address %></p>
+        </div>
+        <div class="card-body">
+          <div class="container">
+            <% if @karyawan %>
+              <h2>Karyawan detail:</h2>
+              <p><strong>Name:</strong> <%= @karyawan.name %></p>
+              <p><strong>Age:</strong> <%= @karyawan.age %></p>
+              <p><strong>Address:</strong> <%= @karyawan.address %></p>
+              </div>
+            <% else %>
+              <h3 class="mt-2"> Belum ada data </h3>
+              <%= link_to "Tambahkan Data", new_karyawan_path, class: "btn btn-primary" %>
+            <%end %>
         </div>
       </div>
     </div>
