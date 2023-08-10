@@ -9,18 +9,18 @@ class Karyawan < ApplicationRecord
 
   self.primary_key = :id
   before_create :generate_uuid
-  after_create :share_karyawan_data
+  #after_create :share_karyawan_data
 
   #FUNCTION HELPER HERE
   def generate_uuid
     self.id ||= SecureRandom.uuid
   end
 
-  def share_karyawan_data
-    User.where.not(id: user_id).each do |other_user|
-      other_user.create_karyawan(attributes.merge(user: other_user))
-    end
-  end
+  # def share_karyawan_data
+  #   User.where.not(id: user_id).each do |other_user|
+  #     other_user.create_karyawan(attributes.merge(user: other_user, id: SecureRandom.uuid))
+  #   end
+  # end
   #END OF HELPER
 
 end

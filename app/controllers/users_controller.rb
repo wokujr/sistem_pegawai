@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     end
   end
 
-  #DELETE ACTION?METHOD
+  #DELETE ACTION/METHOD
   def destroy
     @user.destroy
     session[:user_id] = nil
