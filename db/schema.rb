@@ -10,9 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_09_021948) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_10_042619) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "clocks", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.uuid "user_id", null: false
     t.boolean "clock_in"
     t.datetime "event_time"
     t.datetime "created_at", null: false
@@ -20,15 +23,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_021948) do
     t.index ["user_id"], name: "index_clocks_on_user_id"
   end
 
-  create_table "karyawans", force: :cascade do |t|
+  create_table "karyawans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.integer "age"
     t.string "address"
-    t.integer "position_id", null: false
+    t.bigint "position_id", null: false
+    t.uuid "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
     t.index ["position_id"], name: "index_karyawans_on_position_id"
+    t.index ["user_id"], name: "index_karyawans_on_user_id"
   end
 
   create_table "positions", force: :cascade do |t|
@@ -38,12 +42,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_021948) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "username"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.boolean "admin", default: false
   end
 
   add_foreign_key "clocks", "users"

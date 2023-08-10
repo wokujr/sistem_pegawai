@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_id_user, only: [:show, :edit, :update]
-  before_action :require_user, except: [:index]
+  before_action :set_id_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:index, :new, :create]
+  before_action :same_user, only: [:edit, :update, :destroy]
 
   def index
     @user = User.all
@@ -38,6 +39,14 @@ class UsersController < ApplicationController
     end
   end
 
+  #DELETE ACTION?METHOD
+  def destroy
+    @user.destroy
+    session[:user_id] = nil
+    flash[:notice] = "Account and all associated has been deleted"
+    redirect_to users_path
+  end
+
   #Additional for Clock in and out here
   def clock_in
     set_id_user
@@ -72,6 +81,13 @@ class UsersController < ApplicationController
 
   def set_id_user
     @user = User.find(params[:id])
+  end
+
+  def same_user
+    if current_user != @user && !current_user.admin?
+      flash[:alert] = "You can only Edit your own account"
+      redirect_to user_path(current_user)
+    end
   end
 
 end

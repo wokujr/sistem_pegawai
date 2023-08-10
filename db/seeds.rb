@@ -14,3 +14,9 @@ Position.create(title: 'Supervisor', salary: 300)
 Position.create(title: 'SPV', salary: 400)
 Position.create(title: "karyawan", salary: 200)
 
+# User.create(username: 'john', email: 'john1@email.com', password_digest: 'sad')
+# User.create(username: 'john1', email: 'john2@email.com', password_digest: 'sad')
+# User.create(username: 'john2', email: 'john3@email.com', password_digest: 'sad')
+# User.create(username: 'john3', email: 'john4@email.com', password_digest: 'sad')
+# User.create(username: 'john4', email: 'john5@email.com', password_digest: 'sad')
+

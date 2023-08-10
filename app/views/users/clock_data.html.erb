@@ -2,31 +2,57 @@
   <div class="mb-4">
     <%= render 'shared/clock' %>
   </div>
-</div>
 
   <table class="table table-bordered mb-4">
+    <thead class="text-center ">
+    <tr>
+      <th> Name </th>
+      <th> Clock-In </th>
+      <th> Clock-Out </th>
+      <th> Action </th>
+    </tr>
+
+    </thead>
     <tbody>
-      <tr>
-        <td><%= current_user.karyawan.name %></td>
-        <td class="text-center">
-          <% if current_user.clocks.any? %>
-            <% current_user.clocks.each do |clock| %>
-              <%= clock.event_time.strftime('%H.%M') %><br>
-            <% end %>
-          <% else %>
-            Not Clocked In
+    <tr>
+      <td><%= current_user.karyawan.name %></td>
+      <td class="text-center">
+        <% clock_in_times = current_user.clocks.where(clock_in: true) %>
+        <% if clock_in_times.any? %>
+          <% clock_in_times.each do |clock| %>
+            <%= clock.event_time.strftime('%H.%M') %>
+            <br>
           <% end %>
-        </td>
-        <td class="text-center">
-          <% if current_user.clocks.last&.clock_in %>
-            <%= link_to 'Clock Out', clock_out_user_path(current_user), data: { turbo_method: :post }, class: "btn btn-danger" %>
-          <% else %>
-            <%= link_to 'Clock In', clock_in_user_path(current_user), data: { turbo_method: :post }, class: "btn btn-primary" %>
+        <% else %>
+          Not Clocked In
+        <% end %>
+      </td>
+
+      <td class="text-center">
+        <% clock_out_times = current_user.clocks.where(clock_in: false) %>
+        <% if clock_out_times.any? %>
+          <% clock_out_times.each do |clock| %>
+            <%= clock.event_time.strftime('%H.%M') %><br>
           <% end %>
-        </td>
-      </tr>
+        <% else %>
+          Not Clocked Out
+        <% end %>
+      </td>
+
+
+
+      <td class="text-center">
+        <% if current_user.clocks.last&.clock_in %>
+          <%= link_to 'Clock Out', clock_out_user_path(current_user), data: { turbo_method: :post }, class: "btn btn-danger" %>
+        <% else %>
+          <%= link_to 'Clock In', clock_in_user_path(current_user), data: { turbo_method: :post }, class: "btn btn-primary" %>
+        <% end %>
+      </td>
+    </tr>
     </tbody>
   </table>
+</div>
+
 
 
 
