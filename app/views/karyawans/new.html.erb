@@ -18,7 +18,7 @@
 
     <div class="form-group">
       <label>Position</label>
-      <select name="karyawan[position_id]" class="form-select w-50 text-center" id="position-select">
+      <label for="position-select"></label><select name="karyawan[position_id]" class="form-select w-50 text-center" id="position-select" data-position-data= '<%= @position_data %>' >
         <option> Pilih posisi </option>
         <%@position.each do |p|%>
           <option value="<%=p.id %>"> <%=p.title %> </option>
@@ -28,35 +28,36 @@
 
     <div class="form-group">
       <label>salary</label>
-      <input class="form-control w-50 text-center" type="number" name="salary" readonly id="salary-field">
+      <label for="salary-field"></label><input class="form-control w-50 text-center" type="number" name="salary" readonly id="salary-field">
     </div>
 
     <%= form.submit "Tambahkan", class: "btn btn-primary mt-4 me-2" %>
     <%= link_to "Back", karyawans_path, class: "btn btn-warning mt-4"%>
   <%end %>
-
 </div>
 
-<script type="text/javascript" charset="utf-8">
-    function setSalary(){
-        const positionSelect = document.getElementById("position-select");
-        const salaryField = document.getElementById("salary-field");
+<%= javascript_include_tag 'fill_salary.js', 'data-turbo-track': 'reload', defer: true %>
 
-        positionSelect.addEventListener("change", () => {
-            const selectedOption = positionSelect.value;
+<!--<script type="text/javascript" charset="utf-8">-->
+<!--    function setSalary(){-->
+<!--        const positionSelect = document.getElementById("position-select");-->
+<!--        const salaryField = document.getElementById("salary-field");-->
 
-            // Convert @position to JSON and insert it directly into the JavaScript
-            const positionData = <%= raw @position.to_json %>;
+<!--        positionSelect.addEventListener("change", () => {-->
+<!--            const selectedOption = positionSelect.value;-->
 
-            const selectedPosition = positionData.find((p) => p.id == selectedOption);
-            if (selectedPosition) {
-                salaryField.value = selectedPosition.salary;
-            } else {
-                // Clear the salary field if the selected position is not found
-                salaryField.value = "";
-            }
-        });
-    }
+<!--            // Convert @position to JSON and insert it directly into the JavaScript-->
+<!--            const positionData = <%#= raw @position.to_json %>;-->
 
-    document.addEventListener("turbo:load", setSalary)
-</script>
+<!--            const selectedPosition = positionData.find((p) => p.id == selectedOption);-->
+<!--            if (selectedPosition) {-->
+<!--                salaryField.value = selectedPosition.salary;-->
+<!--            } else {-->
+<!--                // Clear the salary field if the selected position is not found-->
+<!--                salaryField.value = "";-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+
+<!--    document.addEventListener("turbo:load", setSalary)-->
+<!--</script>-->

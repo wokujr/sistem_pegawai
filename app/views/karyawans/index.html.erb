@@ -14,17 +14,21 @@
       </thead>
 
       <tr>
-        <td><%= link_to @user.karyawan.name, user_path(@user) %></td>
-        <td><%= @user.karyawan.age %></td>
-        <td><%= @user.karyawan.address %></td>
-        <td><%= @user.karyawan.position.title %></td>
-        <td><%= @user.karyawan.position.salary %></td>
-        <td class="d-flex justify-content-center">
-          <% if logged_in? && @user == current_user %>
-            <%= button_to "Delete", user_path(@user), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?" }, class: "btn btn-danger mx-2" %>
-            <%= link_to "Edit User", edit_user_path(@user), class: "btn btn-success mx-2" %>
-          <% end %>
-        </td>
+        <% if @user.nil? %>
+          <td><%= link_to @user.karyawan.name, user_path(@user) %></td>
+          <td><%= @user.karyawan.age %></td>
+          <td><%= @user.karyawan.address %></td>
+          <td><%= @user.karyawan.position.title %></td>
+          <td><%= @user.karyawan.position.salary %></td>
+          <td class="d-flex justify-content-center">
+            <% if logged_in? && @user == current_user %>
+              <%= button_to "Delete", user_path(@user), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?" }, class: "btn btn-danger mx-2" %>
+              <%= link_to "Edit User", edit_user_path(@user), class: "btn btn-success mx-2" %>
+            <% end %>
+          </td>
+        <% else %>
+          <h3> No data available for this user </h3>
+        <% end %>
       </tr>
     </table>
     <% if logged_in? %>

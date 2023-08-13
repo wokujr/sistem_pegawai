@@ -1,7 +1,6 @@
 class KaryawansController < ApplicationController
   before_action :load_position
   before_action :require_user, except: [:index]
-  before_action :authorize_admin, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @karyawan = Karyawan.all
@@ -9,8 +8,12 @@ class KaryawansController < ApplicationController
   end
 
   def new
-    @karyawan = Karyawan.new
-    load_position
+    @user = User.find(session[:user_id])
+    @position_data = @position.to_json
+    if @user
+      @karyawan = Karyawan.new
+      load_position
+    end
   end
 
   def create
