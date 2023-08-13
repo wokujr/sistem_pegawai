@@ -13,4 +13,11 @@ module UsersHelper
     image_tag(gravatar_url, alt: user.username, class: "rounded mx-auto d-block shadow")
   end
 
+  def same_user
+    if current_user != @user && !current_user.admin?
+      flash[:alert] = "You can only Edit your own account"
+      redirect_to user_path(current_user)
+    end
+  end
+
 end

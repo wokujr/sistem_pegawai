@@ -1,6 +1,7 @@
 class KaryawansController < ApplicationController
   before_action :load_position
   before_action :require_user, except: [:index]
+  before_action :authorize_admin, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @karyawan = Karyawan.all
@@ -62,6 +63,10 @@ class KaryawansController < ApplicationController
 
   def load_position
     @position = Position.all
+  end
+
+  def authorize_admin
+    redirect_to root_path, alert: 'Access denied.' unless current_user.admin?
   end
 end
 
