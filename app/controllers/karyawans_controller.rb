@@ -3,6 +3,7 @@ class KaryawansController < ApplicationController
   before_action :require_user, except: [:index]
 
   def index
+    @karyawan = Karyawan.all
     @user= current_user
   end
 
@@ -37,7 +38,8 @@ class KaryawansController < ApplicationController
   end
 
   def show
-    @karyawan = Karyawan.find(params[:id])
+    find_karyawan
+    authorize @karyawan
     @karyawan.user = current_user
     load_position
     @user = User.all
@@ -55,7 +57,7 @@ class KaryawansController < ApplicationController
     @karyawan = Karyawan.find(params[:id])
   end
   def karyawan_params
-    params.require(:karyawan).permit(:name, :address, :age, :position_id, :salary)
+    params.require(:karyawan).permit(:name, :address, :age, :position_id, :salary, :user_id)
   end
 
   def load_position

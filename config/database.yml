@@ -11,15 +11,21 @@ default: &default
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  adapter: postgresql
+  host: localhost
+  port: 5432
+  database: sistem_pegawai_development
+  username: postgres
+  password: admin
+
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/test.sqlite3
+  database: sistem_pegawai_test
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: sistem_pegawai_production

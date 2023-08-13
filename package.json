@@ -2,7 +2,9 @@
   "name": "siste_pegawai",
   "version": "1.0.0",
   "dependencies": {
+    "@doabit/semantic-ui-sass": "^2.4.5",
     "controllers": "^0.0.2",
-    "jquery": "^3.7.0"
+    "jquery": "^3.7.0",
+    "popper.js": "^1.16.1"
   }
 }

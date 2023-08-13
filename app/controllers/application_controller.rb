@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :authorize_admin
   def current_user
     @current_user ||= User.find(session[:user_id])  if session[:user_id]
   end
@@ -15,4 +15,11 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  def authorize_admin
+    redirect_to root_path, alert: "You Don't have permission to do that" unless current_user.admin?
+  end
+
 end
+
+

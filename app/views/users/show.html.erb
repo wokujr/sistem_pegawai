@@ -1,31 +1,42 @@
-<h1 class="mb-4 d-flex align-items-center justify-content-center"> <%= @user.username %>'s profile </h1>
-<div class="container">
-  <div class="row justify-content-md-center">
-    <div class="col-8 mt-4">
-      <div class="card text-center shadow mb-5 bg-white rounded">
-        <div class="card-header font-italic">
-          <%= link_to @user.username, karyawan_path(@user), class: "fs-3" %>
+<% if current_user && logged_in? || admin? %>
 
-          <%=profile_img @user, size:200%>
-        </div>
-        <div class="card-body">
-          <div class="container text-start">
-            <% if @karyawan %>
-              <h2 class="text-center">Karyawan detail:</h2>
-              <p><strong>Name:</strong> <%= @karyawan.name %></p>
-              <p><strong>Age:</strong> <%= @karyawan.age %></p>
-              <p><strong>Address:</strong> <%= @karyawan.address %></p>
+  <h1 class="mb-4 d-flex align-items-center justify-content-center"> <%= @user.username %>'s profile </h1>
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-8 mt-4">
+        <div class="card text-center shadow mb-5 bg-white rounded">
+          <div class="card-header font-italic">
+            <%= link_to @user.username, karyawan_path(@user), class: "fs-3" %>
+
+            <%= profile_img @user, size: 200 %>
+          </div>
+          <div class="card-body">
+            <div class="container text-start">
+              <% if @karyawan %>
+                <h2 class="text-center">Karyawan detail:</h2>
+                <p><strong>Name:</strong> <%= @karyawan.name %></p>
+                <p><strong>Age:</strong> <%= @karyawan.age %></p>
+                <p><strong>Address:</strong> <%= @karyawan.address %></p>
+                </div>
+              <% else %>
+                <h3 class="mt-2"> Belum ada data </h3>
+                <%= link_to "Tambahkan Data", new_karyawan_path, class: "btn btn-primary" %>
+              <% end %>
               </div>
-            <% else %>
-              <h3 class="mt-2"> Belum ada data </h3>
-              <%= link_to "Tambahkan Data", new_karyawan_path, class: "btn btn-primary" %>
-            <%end %>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="mb-4 text-center ">
-  <%= link_to "Edit user", edit_user_path, class: "btn btn-outline-primary btn-lg w-25" %>
-</div>
+  <%if current_user %>
+    <div class="mb-4 text-center ">
+      <%= link_to "Edit user", edit_user_path, class: "btn btn-outline-primary btn-lg w-25" %>
+    </div>
+  <%end %>
+
+<% end %>
+
+
+
+
+

@@ -11,27 +11,22 @@
         <ul class="navbar-nav d-flex ">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Profile [<%= current_user.username %>]
+              <%=("ADMIN") if current_user.admin %> [ <%= current_user.username %> ]
             </a>
               <ul class="dropdown-menu">
                 <li><%= link_to "View your profile", user_path(current_user), class: "dropdown-item" %></li>
                 <li><%= link_to "Edit your profile", edit_user_path(current_user), class: "dropdown-item" %></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
+                <li><hr class="dropdown-divider"></li>
                 <li><%= link_to "Your Presence", clock_data_path, class: "dropdown-item" %></li>
+                <li class="nav-item ms-2 mt-auto"><%= link_to "Delete User", user_path(current_user), class: "dropdown-item text-danger", data: {turbo_method: :delete} %></li>
+                <%if current_user.admin %>
+                <%=link_to "Admin", admin_path, class: "nav-item ms-2 mt-auto dropdown-item text-info" %>
+                  <%end %>
               </ul>
           </li>
-
-          <li class="nav-item ms-2">
-            <%= link_to "User List", users_path, class: "nav-link" %>
-          </li>
+          <li class="nav-item ms-2"><%= link_to "User List", users_path, class: "nav-link" %></li>
+          <li class="nav-item ms-2"><%= link_to "Karyawan", karyawans_path, class: "nav-link" %> </li>
         </ul>
-
-
-          <!--<li class="nav-item ms-2">-->
-          <%#= link_to "Karyawan Info", karyawans_path, class: "nav-link" %>
-          <!--</li>-->
       <% end %>
 
       <ul class="navbar-nav text-white d-flex ms-auto mx-3">
