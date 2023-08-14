@@ -6,6 +6,7 @@ gem 'semantic-ui-sass'
 gem 'jquery-rails'
 gem 'devise'
 gem 'pundit'
+gem 'rack-cors'
 
 ruby "3.2.2"
 

@@ -5,6 +5,7 @@ class KaryawansController < ApplicationController
   def index
     @karyawan = Karyawan.all
     @user= current_user
+    render json: @karyawan
   end
 
   def new
