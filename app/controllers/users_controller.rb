@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     session[:user_id] = nil
-    redirect_to users_path, notice: "User Has Deleted"
+    redirect_to root_path, notice: "User Has Deleted"
   end
 
   #Additional for Clock in and out here

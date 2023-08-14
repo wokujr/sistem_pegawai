@@ -1,35 +1,31 @@
 <div class="container">
   <% if logged_in? && @user == current_user %>
-    <h1 class="mb-4 d-flex align-items-center justify-content-center ">Karyawan</h1>
-    <table class="table mt-4 table-bordered">
-      <thead>
+    <h1 class="mb-4 mt-4 d-flex align-items-center justify-content-center ">Karyawan</h1>
+    <table class="table mt-4">
+      <thead class="table-info">
       <tr>
-        <th class="text-center">Nama</th>
-        <th class="text-center">Usia</th>
-        <th class="text-center">Alamat</th>
-        <th class="text-center">Jabatan</th>
-        <th class="text-center">Salary</th>
-        <th class="text-center">Action</th>
-      </tr>
-      </thead>
-
-      <tr>
-        <% if @user %>
-          <td><%= link_to @user.karyawan.name, user_path(@user) %></td>
-          <td><%= @user.karyawan.age %></td>
-          <td><%= @user.karyawan.address %></td>
-<!--          <td><%#= @user.karyawan.position.title %></td>-->
-<!--          <td><%#= @user.karyawan.position.salary %></td>-->
-          <td class="d-flex justify-content-center">
-            <% if logged_in? && @user == current_user %>
-              <%= button_to "Delete", user_path(@user), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?" }, class: "btn btn-danger mx-2" %>
-              <%= link_to "Edit User", edit_user_path(@user), class: "btn btn-success mx-2" %>
-            <% end %>
-          </td>
-        <% else %>
-          <h3> No data available for this user </h3>
+        <th>Nama</th>
+        <th>Alamat</th>
+        <th>Usia</th>
+        <% if @user.admin %>
+          <th class="text-center">Action</th>
         <% end %>
       </tr>
+      </thead>
+      <tbody class="table-group-divider">
+      <% @karyawan.each do |karyawan| %>
+        <tr>
+          <td> <%= karyawan.name %> </td>
+          <td> <%= karyawan.address %></td>
+          <td> <%= karyawan.age %></td>
+          <% if @user.admin %>
+            <td class="d-flex justify-content-center">
+              <%= button_to "Delete", user_path(@user), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?" }, class: "btn btn-danger mx-2" %>
+              <%= link_to "Edit User", edit_user_path(@user), class: "btn btn-success mx-2" %>
+            </td>
+          <% end %>
+      <% end %>
+      </tbody>
     </table>
     <% if logged_in? %>
       <%= link_to "Tambahkan karyawan", new_karyawan_path, class: "btn btn-primary", turbo_frame: 'turbo-frame' %>
