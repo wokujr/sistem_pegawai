@@ -4,7 +4,6 @@ class CreateKaryawans < ActiveRecord::Migration[7.0]
       t.string :name
       t.integer :age
       t.string :address
-      t.references :position, foreign_keys: true , null: false
       t.references :user, foreign_keys: true, null:false, type: :uuid
 
       t.timestamps

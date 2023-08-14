@@ -32,11 +32,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_023441) do
     t.string "name"
     t.integer "age"
     t.string "address"
-    t.bigint "position_id", null: false
     t.uuid "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["position_id"], name: "index_karyawans_on_position_id"
     t.index ["user_id"], name: "index_karyawans_on_user_id"
   end
 

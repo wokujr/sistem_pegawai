@@ -66,7 +66,7 @@ class KaryawansController < ApplicationController
     @karyawan = Karyawan.find(params[:id])
   end
   def karyawan_params
-    params.require(:karyawan).permit(:name, :address, :age, :position_id, :salary, :user_id, position_ids: [])
+    params.require(:karyawan).permit(:name, :address, :age, :salary, :user_id, position_ids: [])
   end
 
   def load_position

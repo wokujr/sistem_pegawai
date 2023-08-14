@@ -7,18 +7,20 @@
 <div class="container">
   <table class="table table-bordered mb-4">
     <thead class="text-center">
+    <% if current_user.karyawan %>
       <tr>
         <th>Name</th>
         <th>Clock-In</th>
         <th>Clock-Out</th>
         <th>Action</th>
       </tr>
+      <%end %>
     </thead>
 
     <tbody>
       <tr>
+        <% if current_user.karyawan %>
         <td><%= current_user.karyawan.name %></td>
-
         <td class="text-center">
           <% last_clock_in = current_user.clocks.where(clock_in: true).last %>
           <% if last_clock_in %>
@@ -44,6 +46,9 @@
             <%= link_to 'Clock In', clock_in_user_path(current_user), data: { turbo_method: :post }, class: "btn btn-primary" %>
           <% end %>
         </td>
+        <%else %>
+          <h3 class="text-center">You have not been added yet please contact Admin</h3>
+        <%end %>
       </tr>
     </tbody>
   </table>
