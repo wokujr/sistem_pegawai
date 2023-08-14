@@ -28,6 +28,11 @@ class KaryawansController < ApplicationController
     end
   end
 
+  def get_salary
+    position = Position.find(params[:id])
+    render json: { salary: position.salary }
+  end
+
   def edit
     find_karyawan
   end
@@ -61,7 +66,7 @@ class KaryawansController < ApplicationController
     @karyawan = Karyawan.find(params[:id])
   end
   def karyawan_params
-    params.require(:karyawan).permit(:name, :address, :age, :position_id, :salary, :user_id)
+    params.require(:karyawan).permit(:name, :address, :age, :position_id, :salary, :user_id, position_ids: [])
   end
 
   def load_position
@@ -71,5 +76,6 @@ class KaryawansController < ApplicationController
   def authorize_admin
     redirect_to root_path, alert: 'Access denied.' unless current_user.admin?
   end
+
 end
 

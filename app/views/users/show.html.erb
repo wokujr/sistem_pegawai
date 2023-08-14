@@ -20,7 +20,7 @@
                 </div>
               <% else %>
                 <h3 class="mt-2"> Belum ada data </h3>
-                <%= link_to "Tambahkan Data", new_karyawan_path, class: "btn btn-primary" %>
+                <%= link_to "Tambahkan Data", new_karyawan_path, class: "btn btn-primary", turbo_frame: 'turbo-frame' %>
               <% end %>
               </div>
         </div>

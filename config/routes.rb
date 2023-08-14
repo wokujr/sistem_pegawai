@@ -7,9 +7,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :karyawans, only: [:index, :show, :create, :new, :edit, :update, :destroy]
+  resources :karyawans, only: [:index, :show, :create, :new, :edit, :update, :destroy] do
+    get 'get_salary', on: :member
+  end
   get 'signup', to: 'users#new'
-
 
   #clock in
   get 'clock_data', to: "users#clock_data"

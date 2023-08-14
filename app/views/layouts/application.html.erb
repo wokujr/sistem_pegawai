@@ -13,6 +13,8 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <%=turbo_frame_tag 'turbo-frame' %>
   </head>
 
   <%= render partial: "shared/navbar" %>

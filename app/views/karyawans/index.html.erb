@@ -14,12 +14,12 @@
       </thead>
 
       <tr>
-        <% if @user.nil? %>
+        <% if @user %>
           <td><%= link_to @user.karyawan.name, user_path(@user) %></td>
           <td><%= @user.karyawan.age %></td>
           <td><%= @user.karyawan.address %></td>
-          <td><%= @user.karyawan.position.title %></td>
-          <td><%= @user.karyawan.position.salary %></td>
+<!--          <td><%#= @user.karyawan.position.title %></td>-->
+<!--          <td><%#= @user.karyawan.position.salary %></td>-->
           <td class="d-flex justify-content-center">
             <% if logged_in? && @user == current_user %>
               <%= button_to "Delete", user_path(@user), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Apakah Anda yakin?" }, class: "btn btn-danger mx-2" %>
@@ -32,7 +32,7 @@
       </tr>
     </table>
     <% if logged_in? %>
-      <%= link_to "Tambahkan karyawan", new_karyawan_path, class: "btn btn-primary" %>
+      <%= link_to "Tambahkan karyawan", new_karyawan_path, class: "btn btn-primary", turbo_frame: 'turbo-frame' %>
     <% end %>
   <% else %>
     <h1 class="text-center mt-4"> You have to be our Employee to do that </h1>
